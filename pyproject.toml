@@ -1,0 +1,29 @@
+# pyproject.toml
+[build-system]
+requires = ["setuptools>=61.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fast-task-manager"
+version = "0.1.0"
+description = "FastAPI backend and NiceGUI frontend for a Task Manager."
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "sqlalchemy",
+    "pydantic",
+    "nicegui",
+    "httpx",
+]
+
+[project.scripts]
+# Define console entry points for both the backend and the GUI
+task-api = "fast_task_manager.main:app"       # Uvicorn will need to be wrapped to run this
+task-gui = "fast_task_manager.gui:run_gui"    # Call the packaged run function to start GUI
+
+[tool.setuptools]
+# Use src layout for package discovery
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["fast_task_manager*"]
